@@ -6,7 +6,7 @@ var person = {
   weight: -1,
   bmi : -1,
   status : "default",
-  asian: false, // WHO have lower BMI thresholds for asians
+  //asian: false, // WHO have lower BMI thresholds for asians
   calculate : function() {
     var result;
     if (this.bmi >= 25) {
