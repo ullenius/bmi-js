@@ -1,7 +1,6 @@
 // BMI calculator, creates result as JSON-object
 // and displays result on webpage
 var heighSquared;
-
 var person = {
   height: -1,
   weight: -1,
@@ -21,19 +20,33 @@ var person = {
   }
 };
 
-person.height = prompt("Please enter your height in centimetres:");
-person.height /= 100;
-person.weight = prompt("Please enter your weight in kilograms:");
+var knapp = document.getElementById("button");
 
-heightSquared = Math.pow(person.height,2);
-person.bmi = person.weight/heightSquared;
+var pushIt = function() {
+  fetchInput();
+  person.calculate();
+  printToDocument(person); // here we go
+  // debug printing
+  console.log(person);
+  console.log(JSON.stringify(person));
+}
 
-person.calculate();
-printToDocument(person); // here we go
+// this is the main program code, 1 line!
+knapp.onclick = pushIt;
 
-// debug printing
-console.log(person);
-console.log(JSON.stringify(person));
+
+function fetchInput() {
+  var heightBox = document.getElementById("heightBox");
+  var weightBox = document.getElementById("weightBox");
+
+  person.height = heightBox.value;
+  person.height /= 100;
+  person.weight = weightBox.value;
+
+  heightSquared = Math.pow(person.height,2);
+  person.bmi = person.weight/heightSquared;
+}
+
 
 function printToDocument(person) {
   var bmi = document.getElementById("bmi");
