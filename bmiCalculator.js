@@ -4,9 +4,21 @@ var heighSquared;
 
 var person = {
   height: -1,
-  weigth: -1,
+  weight: -1,
   bmi : -1,
   status : "default",
+  asian: false, // WHO have lower a lower BMI threshold for asians
+  calculate : function() {
+    var result;
+    if (this.bmi >= 25) {
+      result = "Overweight";
+    } else if ( this.bmi < 18) {
+      result = "Underweight"
+    } else {
+      result = "Normal weight";
+    }
+    this.status = result;
+  }
 };
 
 person.height = prompt("Please enter your height in centimetres:");
@@ -19,27 +31,17 @@ heightSquared = Math.pow(person.height,2);
 person.bmi = person.weight/heightSquared;
 console.log(person.bmi);
 
-person.status = makeResult(person.bmi);
+person.calculate();
 console.log("Result: " + person.status);
-
 console.log(person);
 console.log(JSON.stringify(person));
 
-function makeResult(bmi) {
-
-  var result;
-  if (bmi >= 25) {
-    result = "Overweight";
-  } else if ( bmi < 18) {
-    result = "Underweight"
-  } else {
-    result = "Normal weight";
-  }
-  return result;
-}
+printToDocument(person); // here we go
 
 function printToDocument(person) {
   var bmi = document.getElementById("bmi");
-  var result = document.getElementById("")
+  var status = document.getElementById("status");
 
+  bmi.innerHTML = "<strong>BMI:</strong> " + person.bmi;
+  status.innerHTML = "<strong>Status:</strong> " + person.status;
 }
