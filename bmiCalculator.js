@@ -23,20 +23,17 @@ var person = {
 
 person.height = prompt("Please enter your height in centimetres:");
 person.height /= 100;
-console.log(person.height);
 person.weight = prompt("Please enter your weight in kilograms:");
-console.log(person.weight);
 
 heightSquared = Math.pow(person.height,2);
 person.bmi = person.weight/heightSquared;
-console.log(person.bmi);
 
 person.calculate();
-console.log("Result: " + person.status);
+printToDocument(person); // here we go
+
+// debug printing
 console.log(person);
 console.log(JSON.stringify(person));
-
-printToDocument(person); // here we go
 
 function printToDocument(person) {
   var bmi = document.getElementById("bmi");
