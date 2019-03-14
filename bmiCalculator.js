@@ -1,5 +1,7 @@
 // BMI calculator, creates result as JSON-object
 // and displays result on webpage
+const OVERWEIGHT_LIMIT = 25;
+const UNDERWEIGHT_LIMIT = 18.5;
 var heighSquared;
 var person = {
   height: -1,
@@ -9,9 +11,9 @@ var person = {
   //asian: false, // WHO have lower BMI thresholds for asians
   calculate : function() {
     var result;
-    if (this.bmi >= 25) {
+    if (this.bmi > OVERWEIGHT_LIMIT) {
       result = "Overweight";
-    } else if ( this.bmi < 18) {
+    } else if (this.bmi < UNDERWEIGHT_LIMIT) {
       result = "Underweight"
     } else {
       result = "Normal weight";
@@ -20,9 +22,7 @@ var person = {
   }
 };
 
-var knapp = document.getElementById("button");
-
-var pushIt = function() {
+var pushIt = function() { // function expression
   fetchInput();
   person.calculate();
   printToDocument(person); // here we go
@@ -31,8 +31,9 @@ var pushIt = function() {
   console.log(JSON.stringify(person));
 }
 
-// this is the main program code, 1 line!
-knapp.onclick = pushIt;
+// this is the main program, the rest is asynchronous
+var button = document.getElementById("button");
+button.onclick = pushIt;
 
 
 function fetchInput() {
